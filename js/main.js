@@ -15,7 +15,7 @@ async function loadColors() {
     records.forEach(function (record, _index) {
       // Gets the ID and skips blank IDs.
       var id = String(record.id).trim();
-      if (id == "") return;
+      if (id === "") return;
       // Gets the valid RGB color values.
       var r = colorValue(record.color.r);
       var g = colorValue(record.color.g);
@@ -26,7 +26,7 @@ async function loadColors() {
       recordCount++;
     });
     // Sets a message if no valid records were found.
-    if (recordCount == 0) newInnerHTML = "No colors found! 😭";
+    if (recordCount === 0) newInnerHTML = "No colors found! 😭";
 
     // Updates the page with the new HTML content.
     document.getElementById("colorRecords").innerHTML = newInnerHTML;
@@ -42,7 +42,7 @@ async function loadColors() {
 // Handles the change event for the color input fields.
 function handleColorChange(e) {
   var value = colorValue(e.value);
-  if (e.value != value.toString()) e.value = value;
+  if (e.value !== value.toString()) e.value = value;
   updateColorPreview();
 }
 
