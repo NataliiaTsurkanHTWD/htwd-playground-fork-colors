@@ -51,13 +51,13 @@ function handleRandomColor(_e) {
   const min = 50; // Minimum value avoids very dark colors (0-49).
   const max = 255; // Maximum color value (255).
   document.getElementById("r").value = colorValue(
-    Math.floor(Math.random() * (max - min)) + min,
+    Math.floor(Math.random() * (max - min + 1)) + min,
   );
   document.getElementById("g").value = colorValue(
-    Math.floor(Math.random() * (max - min)) + min,
+    Math.floor(Math.random() * (max - min + 1)) + min,
   );
   document.getElementById("b").value = colorValue(
-    Math.floor(Math.random() * (max - min)) + min,
+    Math.floor(Math.random() * (max - min + 1)) + min,
   );
   updateColorPreview();
 }
