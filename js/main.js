@@ -1,114 +1,154 @@
-// load json function
+/**
+ * Loads the colors data from the JSON file and updates the page content.
+ */
+async function loadColors() {
+  const colorRecordsElement = document.getElementById("colorRecords");
+  try {
+    // Fetches the colors data from the JSON file
+    // with a query parameter to prevent caching.
+    const response = await fetch(`data/colors.json?t=${Date.now()}`);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
-function loadColors() {
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      var recordCount = 0;
-      var records = JSON.parse(this.responseText);
-      var newInnerHTML = "";
+    // Parses the JSON response into a JavaScript object.
+    const records = await response.json();
+    if (!Array.isArray(records)) throw new Error("Unexpected data format");
 
-      // process records
-      records.forEach(function (record, index) {
-        // get id and skip blank ids
-        var id = String(record.id).trim();
-        if (id == "") return;
-        // get RGB color values
-        var r = colorValue(record.color.r);
-        var g = colorValue(record.color.g);
-        var b = colorValue(record.color.b);
-        // set HTML output
-        newInnerHTML += recordAsHTML(id, r, g, b);
-        // count records found
-        recordCount++;
-      });
-      // message for no records
-      if (recordCount == 0) newInnerHTML = "No colors found! 😭";
+    // Processes each record and builds HTML output.
+    let recordCount = 0;
+    let newInnerHTML = "";
+    for (const record of records) {
+      const id = String(record.id).trim();
+      if (id === "") continue;
 
-      // replace content
-      document.getElementById("colorRecords").innerHTML = newInnerHTML;
+      const r = colorValue(record.color.r);
+      const g = colorValue(record.color.g);
+      const b = colorValue(record.color.b);
+
+      newInnerHTML += recordAsHTML(id, r, g, b);
+      recordCount++;
     }
-  };
-  xmlhttp.open("GET", "data/colors.json?t=" + Date.now(), true);
-  xmlhttp.send();
+
+    // Updates the page with the new HTML content.
+    if (recordCount > 0) colorRecordsElement.innerHTML = newInnerHTML;
+    else colorRecordsElement.textContent = "No colors found! 😭";
+  } catch (error) {
+    console.error("Failed to load colors:", error);
+    colorRecordsElement.textContent = "Error loading colors 😞";
+  }
 }
 
-// choose color functions
-
+/**
+ * Handles the change event for the color input fields.
+ * @param {HTMLInputElement} e
+ */
 function handleColorChange(e) {
-  var value = colorValue(e.value);
-  if (e.value != value.toString()) e.value = value;
+  const value = colorValue(e.value);
+  if (e.value !== value.toString()) e.value = value;
   updateColorPreview();
 }
 
-function handleRandomColor(e) {
-  // limit random values between min and max
-  const min = 50; // 0
-  const max = 255; // 255
-  document.getElementById("r").value = colorValue(
-    Math.floor(Math.random() * (max - min)) + min,
-  );
-  document.getElementById("g").value = colorValue(
-    Math.floor(Math.random() * (max - min)) + min,
-  );
-  document.getElementById("b").value = colorValue(
-    Math.floor(Math.random() * (max - min)) + min,
-  );
+/**
+ * Handles the click event for the random color button.
+ */
+function handleRandomColor() {
+  const min = 50; // Minimum value avoids very dark colors (0-49).
+  const max = 255; // Maximum color value (255).
+
+  ["r", "g", "b"].forEach((id) => {
+    document.getElementById(id).value =
+      Math.floor(Math.random() * (max - min + 1)) + min;
+  });
+
   updateColorPreview();
 }
 
+/**
+ * Updates the color preview element based on the current RGB values.
+ */
 function updateColorPreview() {
-  var r = colorValue(document.getElementById("r").value);
-  var g = colorValue(document.getElementById("g").value);
-  var b = colorValue(document.getElementById("b").value);
-  var color = RGBColorValue(r, g, b);
-  var title = titleAttribute("Preview", color);
-  var element = document.getElementById("colorPreview");
-  element.style["background-color"] = color;
-  element.title = title;
-  document.getElementById("colorPreviewJson").innerHTML = recordAsJSON(r, g, b);
+  const r = colorValue(document.getElementById("r").value);
+  const g = colorValue(document.getElementById("g").value);
+  const b = colorValue(document.getElementById("b").value);
+
+  const color = RGBColorValue(r, g, b);
+  const title = titleString("Preview", color);
+
+  const colorPreviewElement = document.getElementById("colorPreview");
+  colorPreviewElement.style.backgroundColor = color;
+  colorPreviewElement.title = title;
+
+  const colorPreviewJsonElement = document.getElementById("colorPreviewJson");
+  colorPreviewJsonElement.textContent = recordAsJSON(r, g, b);
 }
 
-// helper functions
-
+/**
+ * Converts RGB values to a CSS color string.
+ * @param {number} r
+ * @param {number} g
+ * @param {number} b
+ * @returns {string}
+ */
 function RGBColorValue(r, g, b) {
-  return "rgb(" + r + ", " + g + ", " + b + ")";
+  return `rgb(${r}, ${g}, ${b})`;
 }
 
-function titleAttribute(id, color) {
-  return escapeHTML(id) + "\n" + escapeHTML(color);
+/**
+ * Creates a title string.
+ * @param {string} id
+ * @param {string} color
+ * @returns {string}
+ */
+function titleString(id, color) {
+  return `${id}\n${color}`;
 }
 
+/**
+ * Creates an HTML span element string.
+ * @param {string} id
+ * @param {number} r
+ * @param {number} g
+ * @param {number} b
+ * @returns {string}
+ */
 function recordAsHTML(id, r, g, b) {
-  var color = RGBColorValue(r, g, b);
-  var title = titleAttribute(id, color);
-  return (
-    '<span title="' +
-    title +
-    '" style="background-color: ' +
-    color +
-    '"></span>'
-  );
+  const color = RGBColorValue(r, g, b);
+  const title = titleString(id, color);
+  return `<span title="${escapeHTML(title)}" style="background-color: ${color}"></span>`;
 }
 
+/**
+ * Creates a JSON string representation of an RGB color.
+ * @param {number} r
+ * @param {number} g
+ * @param {number} b
+ * @returns {string}
+ */
 function recordAsJSON(r, g, b) {
-  return '"color": { "r": ' + r + ', "g": ' + g + ', "b": ' + b + " }";
+  return `"color": { "r": ${r}, "g": ${g}, "b": ${b} }`;
 }
 
+/**
+ * Escapes special characters in a string for safe HTML display.
+ * @param {string} text
+ * @returns {string}
+ */
 function escapeHTML(text) {
-  var map = {
+  const map = {
     "&": "&amp;",
     "<": "&lt;",
     ">": "&gt;",
     '"': "&quot;",
     "'": "&#039;",
   };
-  return text.replace(/[&<>"']/g, function (m) {
-    return map[m];
-  });
+  return text.replace(/[&<>"']/g, (match) => map[match]);
 }
 
+/**
+ * Validates a color value to be between 0 and 255.
+ * @param {string|number} value
+ * @returns {number}
+ */
 function colorValue(value) {
-  var x = parseInt(value) || 0;
+  const x = parseInt(value, 10) || 0;
   return x < 0 ? 0 : x > 255 ? 255 : x;
 }
