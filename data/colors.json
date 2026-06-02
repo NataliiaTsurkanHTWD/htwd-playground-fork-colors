@@ -319,6 +319,11 @@
     "color": { "r": 255, "g": 255, "b": 255 }
   },
   {
+    "_comment": "Reihe 2 Platz 4",
+    "id": "s88711",
+    "color": { "r": 44, "g": 66, "b": 55 }
+  },
+  {
     "_comment": "Reihe 3 Platz 5",
     "id": "",
     "color": { "r": 255, "g": 255, "b": 255 }
