@@ -72,8 +72,8 @@ dass sich vor dem letzten Eintrag **ein Komma** und danach **keines** befindet.
 1. Forke dieses Repository als Kopie in deinen Account.
 2. Clone es lokal auf deinen Rechner.
 3. (optional) Erstelle dir einen neuen Branch und wechsle in diesen.
-4. Passe einen Eintrag entsprechend deines Platzes im Praktikum (siehe Attribute
-   `_comment`) an.
+4. Passe einen Eintrag in der _colors.json_ entsprechend deines Platzes im
+   Praktikum (siehe Attribute `_comment`) an.
 
    ```json
    {
