@@ -235,11 +235,43 @@
     "id": "s88216 | Driftfich",
     "color": { "r": 76, "g": 178, "b": 165 }
   },
-  
   {
-    "_comment": "Reihe 1 Platz 1",
     "id": "Muuurius 2.0",
     "color": { "r": 137, "g": 242, "b": 245 }
+  },
+  {
+    "id": "s89580",
+    "color": { "r": 139, "g": 69, "b": 142 }
+  },
+  {
+    "id": "s88509",
+    "color": { "r": 64, "g": 198, "b": 99 }
+  },
+  {
+    "id": "s89057",
+    "color": { "r": 255, "g": 255, "b": 255 }
+  },
+  {
+    "id": "s88711",
+    "color": { "r": 44, "g": 66, "b": 55 }
+  },
+  {
+    "id": "bluebanana2026",
+    "color": { "r": 57, "g": 255, "b": 30 }
+  },
+  {
+    "id": "alina1334",
+    "color": { "r": 230, "g": 230, "b": 250 }
+  },
+  {
+    "id": "wangjunyan2018",
+    "color": { "r": 255, "g": 255, "b": 0 }
+  },
+
+  {
+    "_comment": "Reihe 1 Platz 1",
+    "id": "",
+    "color": { "r": 255, "g": 255, "b": 255 }
   },
   {
     "_comment": "Reihe 1 Platz 2",
@@ -258,8 +290,8 @@
   },
   {
     "_comment": "Reihe 1 Platz 5",
-    "id": "s89580",
-    "color": { "r": 139, "g": 69, "b": 142 }
+    "id": "",
+    "color": { "r": 255, "g": 255, "b": 255 }
   },
   {
     "_comment": "Reihe 1 Platz 6",
@@ -305,8 +337,8 @@
   },
   {
     "_comment": "Reihe 3 Platz 2",
-    "id": "s88509",
-    "color": { "r": 64, "g": 198, "b": 99 }
+    "id": "",
+    "color": { "r": 255, "g": 255, "b": 255 }
   },
   {
     "_comment": "Reihe 3 Platz 3",
@@ -315,13 +347,13 @@
   },
   {
     "_comment": "Reihe 3 Platz 4",
-    "id": "s89057",
+    "id": "",
     "color": { "r": 255, "g": 255, "b": 255 }
   },
   {
     "_comment": "Reihe 2 Platz 4",
-    "id": "s88711",
-    "color": { "r": 44, "g": 66, "b": 55 }
+    "id": "",
+    "color": { "r": 255, "g": 255, "b": 255 }
   },
   {
     "_comment": "Reihe 3 Platz 5",
@@ -341,8 +373,8 @@
   },
   {
     "_comment": "Reihe 4 Platz 2",
-    "id": "bluebanana2026",
-    "color": { "r": 57, "g": 255, "b": 30 }
+    "id": "",
+    "color": { "r": 255, "g": 255, "b": 255 }
   },
   {
     "_comment": "Reihe 4 Platz 3",
@@ -351,13 +383,13 @@
   },
   {
     "_comment": "Reihe 4 Platz 4",
-    "id": "alina1334",
-    "color": { "r": 230, "g": 230, "b": 250 }
+    "id": "",
+    "color": { "r": 255, "g": 255, "b": 255 }
   },
   {
     "_comment": "Reihe 4 Platz 5",
-    "id": "wangjunyan2018",
-    "color": { "r": 255, "g": 255, "b": 0 }
+    "id": "",
+    "color": { "r": 255, "g": 255, "b": 255 }
   },
   {
     "_comment": "Reihe 4 Platz 6",
