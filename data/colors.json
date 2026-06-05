@@ -346,9 +346,8 @@
     "color": { "r": 50, "g": 100, "b": 255 }
   },
   {
-    "_comment": "Reihe 3 Platz 4",
-    "id": "",
-    "color": { "r": 255, "g": 255, "b": 255 }
+    "id": "Michael-Lisek",
+    "color": { "r": 255, "g": 100, "b": 45 }
   },
   {
     "_comment": "Reihe 2 Platz 4",
